@@ -90,7 +90,7 @@ if (database.Icon && database.Icon.Type === 'file') {
         <main>
           <div class="content">
             <header>
-              <h1>
+              <!-- <h1>
                 <a href={getNavLink('/')}>
                   {
                     database.Icon && database.Icon.Type === 'emoji' ? (
@@ -117,7 +117,7 @@ if (database.Icon && database.Icon.Type === 'file') {
                     )
                   }
                 </a>
-              </h1>
+              </h1> -->
               <div class="description">
                 {database.Description}
               </div>
@@ -157,7 +157,7 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   .container > div {
     display: flex;
-    max-width: 1680px;
+    max-width: 1280px;
   }
   @media (max-width: 640px) {
     .container > div {
@@ -178,7 +178,7 @@ if (database.Icon && database.Icon.Type === 'file') {
 
   aside {
     order: 2
-    width: 400px;
+    width: 300px;
     padding: 20px 20px;
     background-color: #fff;
   }
@@ -200,7 +200,7 @@ if (database.Icon && database.Icon.Type === 'file') {
   }
 
   div.content {
-    padding: 20px 150px;
+    padding: 20px 40px;
   }
   @media (max-width: 640px) {
     div.content {
