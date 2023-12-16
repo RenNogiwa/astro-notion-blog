@@ -81,6 +81,7 @@ const currentTag = posts[0].Tags.find((t) => t.name === tag)
 
     <footer>
       <Pagination
+        tag={tag}
         currentPage={parseInt(page, 10)}
         numberOfPages={numberOfPages}
       />
