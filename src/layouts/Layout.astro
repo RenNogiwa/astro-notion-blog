@@ -24,7 +24,7 @@ const siteOGImage = new URL(
   Astro.site
 )
 
-let coverImageURL: string
+let coverImageURL: string = ''
 if (database.Cover) {
   if (database.Cover.Type === 'external') {
     coverImageURL = database.Cover.Url
@@ -37,8 +37,8 @@ if (database.Cover) {
   }
 }
 
-let customIconURL: string
-if (database.Icon && database.Icon.Type === 'file') {
+let customIconURL: string = ''
+if (database.Icon && database.Icon.Type === 'file' && 'Url' in database.Icon) {
   try {
     customIconURL = filePath(new URL(database.Icon.Url))
   } catch (err) {
@@ -56,7 +56,9 @@ if (database.Icon && database.Icon.Type === 'file') {
     <meta name="generator" content={Astro.generator} />
     <title>{siteTitle}</title>
     <meta name="description" content={siteDescription} />
+    <meta name="theme-color" content="#111111" />
     <link rel="canonical" href={siteURL} />
+    <meta property="og:type" content="website" />
     <meta property="og:url" content={siteURL} />
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={siteDescription} />
