@@ -1,0 +1,56 @@
+.main header {
+  padding: 0 0 20px;
+}
+.main {
+  /* 統一幅に合わせるため、内部余白はページ側でコントロール */
+}
+.main footer {
+  border-top: 1px dashed #d1d5db; /* gray-300 */
+  margin: 0 auto;
+  padding: 40px 0 0;
+}
+@media (max-width: 640px) {
+  .main footer {
+    margin: 0 auto 40px;
+  }
+}
+
+.post {
+  margin: 0 auto 16px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+.post footer {
+  margin-top: 0.5rem;
+  padding: 0;
+  border: 0;
+}
+
+/* Index list style */
+.postList {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 18px;
+}
+.postList li {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 6px 0;
+}
+.postDate {
+  color: #6b7280; /* gray-500 */
+  min-width: 7.5rem;
+  font-size: 0.875rem;
+}
+.postLink {
+  color: #0f766e;
+}
+.olderLink {
+  margin: 10px 0 26px;
+}
+.tagsBox {
+  margin-top: 8px;
+}

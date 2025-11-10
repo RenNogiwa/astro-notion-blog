@@ -1,0 +1,64 @@
+---
+import { ENABLE_LIGHTBOX } from '../../server-constants.ts'
+import * as interfaces from '../../lib/interfaces'
+import { filePath } from '../../lib/blog-helpers'
+import Caption from './Caption.astro'
+
+export interface Props {
+  block: interfaces.Block
+}
+
+const { block } = Astro.props
+
+let image = ''
+if (block.Image?.External) {
+  image = block.Image.External.Url
+} else if (block.Image?.File) {
+  // 開発環境では直接URLを使用、本番環境ではfilePathを使用
+  if (import.meta.env.DEV) {
+    image = block.Image.File.Url
+  } else {
+    image = filePath(new URL(block.Image.File.Url))
+  }
+}
+---
+
+<figure class="image">
+  {
+    image && (
+      <div>
+        <div>
+          {ENABLE_LIGHTBOX ? (
+            <a data-fslightbox href={image} data-type="image">
+              <img src={image} alt="Image in a image block" loading="lazy" />
+            </a>
+          ) : (
+            <img src={image} alt="Image in a image block" loading="lazy" />
+          )}
+        </div>
+        <Caption richTexts={block.Image?.Caption || []} />
+      </div>
+    )
+  }
+</figure>
+
+<style>
+  .image {
+    display: block;
+    margin: 0.2rem auto 0;
+    width: 100%;
+  }
+  .image > div {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .image > div > div {
+    width: 100%;
+  }
+  .image > div > div img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
+</style>

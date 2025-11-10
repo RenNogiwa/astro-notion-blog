@@ -1,0 +1,49 @@
+---
+import { NUMBER_OF_POSTS_PER_PAGE } from '../server-constants.ts'
+import { getPosts, getAllTags, getNumberOfPages } from '../lib/notion/client.ts'
+import { getDateStr } from '../lib/blog-helpers.ts'
+import { getPostLink } from '../lib/blog-helpers.ts'
+import Layout from '../layouts/Layout.astro'
+import NoContents from '../components/NoContents.astro'
+import BlogTagsLink from '../components/BlogTagsLink.astro'
+import styles from '../styles/blog.module.css'
+
+const [posts, tags, numberOfPages] = await Promise.all([
+  getPosts(NUMBER_OF_POSTS_PER_PAGE),
+  getAllTags(),
+  getNumberOfPages(),
+])
+---
+
+<Layout title="" description="" path="/" ogImage="">
+  <div slot="main" class={styles.main}>
+    <h2>Posts</h2>
+    {
+      posts.length === 0 ? (
+        <NoContents contents={posts} />
+      ) : (
+        <ul class={styles.postList}>
+          {posts.map((post) => (
+            <li>
+              <span class={styles.postDate}>{post.Date ? getDateStr(post.Date) : ''}</span>
+              <a href={getPostLink(post.Slug)} class={styles.postLink}>{post.Title}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {numberOfPages > 1 && (
+      <div class={styles.olderLink}>
+        <a href="/posts/page/2">Older posts</a>
+      </div>
+    )}
+
+    <h2>Tags</h2>
+    <div class={styles.tagsBox}>
+      <BlogTagsLink heading="" tags={tags} />
+    </div>
+  </div>
+
+  
+</Layout>
